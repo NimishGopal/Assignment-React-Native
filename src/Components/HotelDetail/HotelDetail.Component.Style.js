@@ -1,11 +1,17 @@
 import {StyleSheet} from 'react-native';
 import Dimensions from 'Dimensions';
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
+    mainContainer:{ 
+        flex: 1, 
+        position: "relative" 
+    },
+    contentContainerStyle: {
+        flexGrow: 1
+    },
     carouselImageWrapper: {
-        flex: 4/10,
-        height: 0
+        flex: 1
     },
     carouselImage: {
         width: 250,
@@ -24,11 +30,9 @@ export default StyleSheet.create({
         color: '#121212'
     },
     buttonWrapper: {
-        flex: 1/10,
         width: width,
         position: 'absolute',
-        bottom: 0,
-        left: 0
+        bottom: 0
     },
     sidePadding:{
         paddingHorizontal: 15

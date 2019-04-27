@@ -3,7 +3,7 @@ import { Text, View, Image } from 'react-native';
 import Button from '../../Button/Button.Component';
 import styles from './Hotel.Component.Style';
 export default Hotel = (props) => {
-    const { hotelName, hotelPrice, hotelCity, hotelLocality, hotelImage, history, id } = props;
+    const { hotelName, hotelPrice, hotelCity, hotelLocality, hotelImage, defaultProps, id } = props;
     const { hotelWrapper, textWrapper, buttonStyle, font18, font24, font12, bold, sidePadding } = styles;
     return (
         <View style={hotelWrapper}>
@@ -20,7 +20,7 @@ export default Hotel = (props) => {
                 <Button
                     buttonText={(hotelPrice) ? "Book Now" : "Sold Out"}
                     active={(hotelPrice) ? true : false}
-                    onPressHandler={() => (hotelPrice) ? history.push({
+                    onPressHandler={() => (hotelPrice) ? defaultProps.history.push({
                         pathname: '/detail',
                         state: {
                             hotelCity: hotelCity,

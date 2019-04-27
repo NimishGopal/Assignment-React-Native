@@ -45,7 +45,7 @@ class HotelDetail extends React.Component {
                     this.props.updatePolicies(result.data.policies);
                     let refactoredEssentials = this.refactorEssentials(result.data.essentials);
                     this.props.updateEssentials(refactoredEssentials);
-                    this.props.selectedRoomPrice(this.props.location.state.hotelPrice);
+                    this.props.selectedRoomPrice(this.props.defaultProps.location.state.hotelPrice);
                 });
             });
     }
@@ -66,57 +66,61 @@ class HotelDetail extends React.Component {
             selectedRoomPrice={() => this.props.selectedRoomPrice}
         />
 
+
     render() {
-        const { hotelName } = this.props.location.state;
-        let key = this.props.location.state.id - 1;
+        const { hotelName } = this.props.defaultProps.location.state;
+        let key = this.props.defaultProps.location.state.id - 1;
         const roomList = this.props.prices[key].price;
         return (
-            <ScrollView contentContainerStyle={{ flex: 1, position: "relative", flexGrow: 1 }}>
-                <View style={carouselImageWrapper}>
-                    <FlatList
-                        keyExtractor={(item, index) => index}
-                        horizontal={true}
-                        data={ImageCarousel}
-                        showsHorizontalScrollIndicator={false}
-                        renderItem={({ item }) => <Image style={carouselImage} source={{ uri: item }} />}
-                    />
-                </View>
-                <View style={[hotelDetailContentWrapper, sidePadding]}>
-                    <View style={hotelNameWrapper}>
-                        <Text style={hotelNameStyle}>
-                            {hotelName}
-                        </Text>
-                    </View>
-                    <View style={iconListWrapper}>
+            <View style={styles.mainContainer}>
+                <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+                    <View style={carouselImageWrapper}>
                         <FlatList
                             keyExtractor={(item, index) => index}
-                            data={this.props.essentials}
                             horizontal={true}
+                            data={ImageCarousel}
                             showsHorizontalScrollIndicator={false}
-                            renderItem={({ item }) =>
-                                <Essential
-                                    icon={item.icon}
-                                    name={item.essential}
-                                />}
+                            renderItem={({ item }) => <Image style={carouselImage} source={{ uri: item }} />}
                         />
                     </View>
-                    <View style={policiesWrapper}>
-                        <Text style={policiesHeading}>
-                            Policies
+                    <View style={[hotelDetailContentWrapper, sidePadding]}>
+                        <View style={hotelNameWrapper}>
+                            <Text style={hotelNameStyle}>
+                                {hotelName}
                             </Text>
-                        <FlatList
-                            keyExtractor={(item, index) => index}
-                            data={this.props.policies}
-                            renderItem={({ item }) => <Text style={policiesText}>• {item}</Text>}
-                        />
-                    </View>
-                    <View style={policiesWrapper}>
-                        <Text style={policiesHeading}>
-                            Select different rooms
+                        </View>
+                        <View style={iconListWrapper}>
+                            <FlatList
+                                keyExtractor={(item, index) => index}
+                                data={this.props.essentials}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                renderItem={({ item }) =>
+                                    <Essential
+                                        icon={item.icon}
+                                        name={item.essential}
+                                    />}
+                            />
+                        </View>
+                        <View style={policiesWrapper}>
+                            <Text style={policiesHeading}>
+                                Policies
+                            </Text>
+                            <FlatList
+                                keyExtractor={(item, index) => index}
+                                data={this.props.policies}
+                                scrollEnabled={false}
+                                renderItem={({ item }) => <Text style={policiesText}>• {item}</Text>}
+                            />
+                        </View>
+                        <View style={policiesWrapper}>
+                            <Text style={policiesHeading}>
+                                Select different rooms
                         </Text>
-                        {this.renderRooms(roomList)}
+                            {this.renderRooms(roomList)}
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
                 <View style={buttonWrapper}>
                     <Button
                         active={true}
@@ -124,7 +128,7 @@ class HotelDetail extends React.Component {
                         onPressHandler={() => console.log('Enjoy Your Booking!!')}
                     />
                 </View>
-            </ScrollView>
+            </View>
         );
 
     }

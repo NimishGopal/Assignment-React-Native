@@ -68,6 +68,7 @@ class HotelList extends React.Component {
             (!this.state.loading) ?
                 <FlatList
                     data={hotels}
+                    style={styles.hotelListWrapper}
                     keyExtractor={(item, index) => item.name}
                     renderItem={({ item }) => {
                         return (
@@ -80,14 +81,16 @@ class HotelList extends React.Component {
                                 id={item.id}
                                 history={history}
                                 prices={prices[item.id -1].price}
+                                defaultProps={this.props.defaultProps}
                             />
                         );
                     }}
                 />
                 :
-                <View style={styles.indicatorWrapper}>
-                    <ActivityIndicator size={50} color="#545454" />
-                </View>
+                <View></View>
+                // <View style={styles.indicatorWrapper}>
+                //     <ActivityIndicator size={50} color="#545454" />
+                // </View>
         );
     };
 };

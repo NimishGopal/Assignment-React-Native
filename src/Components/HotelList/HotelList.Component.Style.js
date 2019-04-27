@@ -7,7 +7,8 @@ export default StyleSheet.create({
         justifyContent: "center"
     },
     hotelListWrapper: {
-        flex: 1,
-        zIndex: 0
+        flex: 0.9,
+        zIndex: 0,
+        // marginTop: 50
     }
 });
