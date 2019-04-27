@@ -19,9 +19,10 @@ export default StyleSheet.create({
     },
     active: {
         borderColor: '#65b823',
-        borderWidth: 2,
+        borderWidth: 3,
     },
     activeText: {
-        color: '#65b823'
+        color: '#65b823',
+        fontWeight: '700'
     }
 });
